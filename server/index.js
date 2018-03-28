@@ -54,27 +54,40 @@ var root = {
             }
         });
     },
+    
+    // });
+    // foundUser.documents.push(newDocument._id);        
+    // foundUser.save((err) => {
+    //     if(err) {
+    //         console.log(err);
+    //     }
+    // });
     addDocument: ({title, user}) => {
         var newDocument = new documentModel();
+        newDocument.title = title;
+        
         return userModel.findOne({email: user}).exec().then((foundUser) => {
-            foundUser.documents.push(newDocument._id)
-            foundUser.save((err) => {
+            newDocument.save((err, updated) => {
                 if(err) {
                     console.log(err);
                 }
             });
-            newDocument.title = title;
-            newDocument.save((err) => {
+            return {foundUser, newDocument}
+        }).then((userAndDocument) => {
+            const {foundUser} = userAndDocument;
+            const {newDocument} = userAndDocument;
+            foundUser.documents.push(newDocument._id);
+            console.log(newDocument._id)
+            return foundUser.save((err) => {
                 if(err) {
                     console.log(err);
                 }
-            });
-        }).then(() => {
-            return userModel.findOne({email: user}).populate('documents').exec().then((foundUser) => {
-                return foundUser.documents;
+                return userModel.populate(foundUser, 'documents', (err, user) => {
+                    return user;
+                    console.log(user)
+                }); 
             });
         });
-        
     },
     getDocuments: ({user}) => {
         if(user) {
