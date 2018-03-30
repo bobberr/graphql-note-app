@@ -1,6 +1,7 @@
 const types = {
     SET_DOCUMENTS: 'SET_DOCUMENTS',
-    SET_ACTIVE_USER: 'SET_ACTIVE_USER' 
+    SET_ACTIVE_USER: 'SET_ACTIVE_USER',
+    SET_ACTIVE_DOCUMENT: 'SET_ACTIVE_DOCUMENT' 
 }
 
 export default types;

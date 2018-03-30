@@ -13,3 +13,10 @@ export const setActiveUser = (email) => {
         email
     }
 }
+
+export const setActiveDocument = (document) => {
+    return {
+        type: types.SET_ACTIVE_DOCUMENT,
+        document
+    }
+}

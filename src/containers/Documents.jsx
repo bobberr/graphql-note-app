@@ -1,11 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { setActiveDocument } from '../redux/actionCreators/actionCreators';
 
 
 const Documents = (props) => {
+    const clickHandler = (document) => {
+        props.setActiveDocument(document);
+    }
     if(props.documents) {
         const documents = props.documents.map((document) => {
-            return <li>{document.title}</li>
+            return <li onClick={clickHandler.bind(null, document)}>{document.title} content:{document.content}</li>
         });
         return(
             <ul>
@@ -24,7 +28,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Documents);
+export default connect(mapStateToProps, {setActiveDocument})(Documents);
 
 
 

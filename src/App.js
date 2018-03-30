@@ -4,6 +4,7 @@ import AddUser from './components/AddUser';
 import SelectUser from './containers/SelectUser';
 import AddDocument from './containers/AddDocument';
 import Documents from './containers/Documents';
+import DocumentDisplay from './containers/DocumentDisplay';
 
 
 class App extends Component {
@@ -14,6 +15,7 @@ class App extends Component {
         <SelectUser/>
         <AddDocument/>
         <Documents/>
+        <DocumentDisplay/>
       </div>
     );
   }

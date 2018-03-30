@@ -17,6 +17,7 @@ const getDocuments = gql`
         getDocuments(user: $user) {
                 id
                 title
+                content
             }
         }
     `
