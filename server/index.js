@@ -54,40 +54,15 @@ var root = {
             }
         });
     },
-    
-    // });
-    // foundUser.documents.push(newDocument._id);        
-    // foundUser.save((err) => {
-    //     if(err) {
-    //         console.log(err);
-    //     }
-    // });
-    addDocument: ({title, user}) => {
-        var newDocument = new documentModel();
+    addDocument: async ({title, user}) => {
+        let newDocument = new documentModel();
         newDocument.title = title;
-        
-        return userModel.findOne({email: user}).exec().then((foundUser) => {
-            newDocument.save((err, updated) => {
-                if(err) {
-                    console.log(err);
-                }
-            });
-            return {foundUser, newDocument}
-        }).then((userAndDocument) => {
-            const {foundUser} = userAndDocument;
-            const {newDocument} = userAndDocument;
-            foundUser.documents.push(newDocument._id);
-            console.log(newDocument._id)
-            return foundUser.save((err) => {
-                if(err) {
-                    console.log(err);
-                }
-                return userModel.populate(foundUser, 'documents', (err, user) => {
-                    return user;
-                    console.log(user)
-                }); 
-            });
-        });
+        const savedNewDocument = await newDocument.save();
+        let foundUser = await userModel.findOne({email: user});
+        foundUser.documents.push(savedNewDocument._id);
+        foundUser = await foundUser.save();
+        const updatedUser = await userModel.populate(foundUser, 'documents');
+        return updatedUser.documents;
     },
     getDocuments: ({user}) => {
         if(user) {

@@ -22,7 +22,7 @@ const AddDocument = (props) => {
             title: this.title.value,
             user: props.email
         }}).then((returnedData) => {
-           console.log(returnedData)
+           props.setDocuments(returnedData.data.addDocument)
         });
         this.title.value = "";
         
