@@ -10,6 +10,8 @@ const addDocumentMutation = gql`
     mutation addDocument($title: String, $user: String) {
         addDocument(title: $title, user: $user) {
             title
+            content
+            id
         }
     }
 `;

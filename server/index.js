@@ -29,6 +29,7 @@ var schema = buildSchema(`
     type Mutation {
         addUser(email: String): User
         addDocument(title: String, user: String): [Document]
+        changeDocument(id: ID, content: String): Document
     }
 `);
 
@@ -57,6 +58,7 @@ var root = {
     addDocument: async ({title, user}) => {
         let newDocument = new documentModel();
         newDocument.title = title;
+        newDocument.content = "";
         const savedNewDocument = await newDocument.save();
         let foundUser = await userModel.findOne({email: user});
         foundUser.documents.push(savedNewDocument._id);
@@ -72,6 +74,12 @@ var root = {
         } else {
             return []; 
         }
+    },
+    changeDocument: async ({id, content}) => {
+        const foundDocument = await documentModel.findById(id);
+        foundDocument.content = content;
+        const savedDocument = await foundDocument.save();
+        return savedDocument;
     }
 }
 

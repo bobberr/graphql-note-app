@@ -9,7 +9,7 @@ const Documents = (props) => {
     }
     if(props.documents) {
         const documents = props.documents.map((document) => {
-            return <li onClick={clickHandler.bind(null, document)}>{document.title} content:{document.content}</li>
+            return <li key={document._id} onClick={clickHandler.bind(null, document)}>{document.title} content:{document.content}</li>
         });
         return(
             <ul>

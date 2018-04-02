@@ -20,3 +20,10 @@ export const setActiveDocument = (document) => {
         document
     }
 }
+
+export const updateDocumentsList = (document) => {
+    return {
+        type: types.UPDATE_DOCUMENTS_LIST,
+        document
+    }
+}
