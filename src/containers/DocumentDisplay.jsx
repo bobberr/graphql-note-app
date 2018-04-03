@@ -27,7 +27,6 @@ class DocumentDisplay extends React.Component {
             id: this.props.document.id,
             content: this.area.value
         }}).then((returnedDocument) => {
-            console.log(returnedDocument)
             this.props.updateDocumentsList(returnedDocument.data.changeDocument);
         });
     }

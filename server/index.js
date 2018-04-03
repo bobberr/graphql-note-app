@@ -69,6 +69,7 @@ var root = {
     getDocuments: ({user}) => {
         if(user) {
             return userModel.findOne({email: user}).populate('documents').exec().then((foundUser) => {
+                console.log('fires')
                 return foundUser.documents;
             });
         } else {

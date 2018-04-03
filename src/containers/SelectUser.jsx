@@ -30,7 +30,8 @@ class SelectUser extends React.Component {
     }
     clickHandler(e) {
         this.props.setActiveUser(e.target.value);
-        this.props.client.query({query: getDocuments, variables: {user: e.target.value}}).then((returnedData) => {
+        this.props.client.query({query: getDocuments, variables: {user: e.target.value}, fetchPolicy: 'network-only'}).then((returnedData) => {
+            console.log(returnedData)
             this.props.setDocuments(returnedData.data.getDocuments);
         });
     }
