@@ -30,6 +30,7 @@ var schema = buildSchema(`
         addUser(email: String): User
         addDocument(title: String, user: String): [Document]
         changeDocument(id: ID, content: String): Document
+        deleteDocument(id: ID, user: String): [Document]
     }
 `);
 
@@ -69,7 +70,6 @@ var root = {
     getDocuments: ({user}) => {
         if(user) {
             return userModel.findOne({email: user}).populate('documents').exec().then((foundUser) => {
-                console.log('fires')
                 return foundUser.documents;
             });
         } else {
@@ -81,6 +81,15 @@ var root = {
         foundDocument.content = content;
         const savedDocument = await foundDocument.save();
         return savedDocument;
+    },
+    deleteDocument: async ({id, user}) => {
+        const foundUser = await userModel.findOne({email: user});
+        const indexOfDocument = foundUser.documents.indexOf(id);
+        foundUser.documents.splice(indexOfDocument, 1);
+        let updatedUser = await foundUser.save();
+        const removed = await documentModel.remove({_id: id});
+        updatedUser = await userModel.populate(foundUser, 'documents');
+        return updatedUser.documents;
     }
 }
 

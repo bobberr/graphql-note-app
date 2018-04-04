@@ -24,6 +24,8 @@ const dataReducer = (state = initialState, action) => {
             })
             const changedState = {...state, documents}
             return changedState;
+        case types.RESET_ACTIVE_DOCUMENT: 
+            return Object.assign({}, state, {document: {content: ""}});
         default: 
             return state;
     }

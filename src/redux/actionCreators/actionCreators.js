@@ -27,3 +27,9 @@ export const updateDocumentsList = (document) => {
         document
     }
 }
+
+export const resetActiveDocument = () => {
+    return {
+        type: types.RESET_ACTIVE_DOCUMENT
+    }
+}
