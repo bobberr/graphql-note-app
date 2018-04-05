@@ -2,8 +2,8 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import { connect } from 'react-redux';
-import { setDocuments } from '../redux/actionCreators/actionCreators'; 
-
+import { setDocuments, filterDocuments } from '../redux/actionCreators/actionCreators'; 
+import debounce from 'lodash.debounce';
 
 
 const addDocumentMutation = gql`
@@ -27,12 +27,14 @@ const AddDocument = (props) => {
            props.setDocuments(returnedData.data.addDocument)
         });
         this.title.value = "";
-        
+    }
+    const changeHandler = () => {
+        props.filterDocuments(this.title.value);
     }
     return (
         <div>
             <form onSubmit={submitHandler}>
-                <input type="text" ref={(ref) => {this.title = ref}}/>
+                <input type="text" onChange={debounce(changeHandler, 1000)} ref={(ref) => {this.title = ref}}/>
                 <button type="submit">+</button>
             </form>
             <ul>
@@ -50,4 +52,4 @@ const mapStateToProps = (state) => {
     }
 } 
 
-export default connect(mapStateToProps, {setDocuments})(graphqBoards);
+export default connect(mapStateToProps, {setDocuments, filterDocuments})(graphqBoards);

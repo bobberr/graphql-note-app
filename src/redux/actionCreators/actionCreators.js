@@ -33,3 +33,10 @@ export const resetActiveDocument = () => {
         type: types.RESET_ACTIVE_DOCUMENT
     }
 }
+
+export const filterDocuments = (keyWord) => {
+    return {
+        type: types.FILTER_DOCUMENTS,
+        keyWord
+    }
+}

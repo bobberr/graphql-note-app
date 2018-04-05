@@ -15,6 +15,9 @@ const changeDocument = gql`
 `;
 
 class DocumentDisplay extends React.Component {
+    state = {
+        saving: false
+    };
     constructor() {
         super();
         this.changeHandler = this.changeHandler.bind(this);
@@ -32,7 +35,10 @@ class DocumentDisplay extends React.Component {
     }
     render() {
         return (
-            <textarea name="" cols="30" rows="10" ref={(ref) => {this.area = ref}} onChange={debounce(this.changeHandler, 2000)}></textarea>
+            <div>
+                <span>{this.state.saving ? "saving" : "saved"}</span>
+                <textarea name="" cols="30" rows="10" ref={(ref) => {this.area = ref}} onChange={debounce(this.changeHandler, 2000)}></textarea>
+            </div>
         )    
     }
 }
