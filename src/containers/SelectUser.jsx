@@ -2,7 +2,7 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { graphql, withApollo } from 'react-apollo';
 import { connect } from 'react-redux';
-import { setDocuments, setActiveUser, resetActiveDocument } from '../redux/actionCreators/actionCreators';
+import { setDocuments, setActiveUser } from '../redux/actionCreators/actionCreators';
 
 const query = gql`
     query GetUsers {
@@ -43,13 +43,11 @@ class SelectUser extends React.Component {
         this.props.setActiveUser(e.target.value);
         this.props.client.query({query: getDocuments, variables: {user: e.target.value}, fetchPolicy: 'network-only'}).then((returnedData) => {
             this.props.setDocuments(returnedData.data.getDocuments);
-            this.props.resetActiveDocument();
         });
     }
     deleteHandler() {
         this.props.client.mutate({mutation: deleteDocument, variables: {id: this.props.document.id, user: this.props.user}}).then((returnedData) => {
             this.props.setDocuments(returnedData.data.deleteDocument);
-            this.props.resetActiveDocument();
         });
     }
     render() {
@@ -78,4 +76,4 @@ const mapStateToProps = (state) => {
 
 const graphqlSelectUser = graphql(query)(withApollo(SelectUser));
 
-export default connect(mapStateToProps, {setDocuments, setActiveUser, resetActiveDocument})(graphqlSelectUser);
+export default connect(mapStateToProps, {setDocuments, setActiveUser})(graphqlSelectUser);

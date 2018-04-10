@@ -1,13 +1,13 @@
 import types from '../actionCreators/types';
 const initialState = {
-    document: {},
+    document: {content: ""},
     keyWord: ""
 };
 
 const dataReducer = (state = initialState, action) => {
     switch(action.type) {
         case types.SET_DOCUMENTS:
-            return Object.assign({}, state, {documents: action.documents, keyWord: ""});
+            return Object.assign({}, state, {documents: action.documents, keyWord: "", document: {content: ""}});
         case types.SET_ACTIVE_USER:
             return Object.assign({}, state, {email: action.email});
         case types.SET_ACTIVE_DOCUMENT:
@@ -25,8 +25,6 @@ const dataReducer = (state = initialState, action) => {
             });
             const changedState = {...state, documents};
             return changedState;
-        case types.RESET_ACTIVE_DOCUMENT: 
-            return Object.assign({}, state, {document: {content: ""}});
         case types.FILTER_DOCUMENTS:
             return Object.assign({}, state, {keyWord: action.keyWord});
         default: 

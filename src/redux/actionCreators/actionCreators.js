@@ -28,12 +28,6 @@ export const updateDocumentsList = (document) => {
     }
 }
 
-export const resetActiveDocument = () => {
-    return {
-        type: types.RESET_ACTIVE_DOCUMENT
-    }
-}
-
 export const filterDocuments = (keyWord) => {
     return {
         type: types.FILTER_DOCUMENTS,
