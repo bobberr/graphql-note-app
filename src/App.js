@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 import AddUser from './components/AddUser';
 import SelectUser from './containers/SelectUser';
 import AddDocument from './containers/AddDocument';
