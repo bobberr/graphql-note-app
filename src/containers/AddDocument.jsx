@@ -32,14 +32,11 @@ const AddDocument = (props) => {
         props.filterDocuments(this.title.value);
     }
     return (
-        <div>
-            <form onSubmit={submitHandler}>
-                <input type="text" onChange={debounce(changeHandler, 1000)} ref={(ref) => {this.title = ref}}/>
-                <button type="submit">+</button>
+        <div className="add-document">
+            <form onSubmit={submitHandler} className="add-document__form">
+                <input className="add-document__input" type="text" onChange={debounce(changeHandler, 1000)} ref={(ref) => {this.title = ref}}/>
+                <button className="add-document__button" type="submit">+</button>
             </form>
-            <ul>
-
-            </ul>
         </div>
     )
 }

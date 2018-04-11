@@ -11,9 +11,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <AddUser/>
-        <SelectUser/>
-        <AddDocument/>
+        <div className="top-panel">
+          <AddDocument/>          
+          <AddUser/>
+          <SelectUser/>
+        </div>
         <Documents/>
         <DocumentDisplay/>
       </div>

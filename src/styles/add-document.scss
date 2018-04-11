@@ -1,0 +1,30 @@
+.add-document {
+    border: 2px solid $main-grey;
+    max-width: 240px;
+    padding: 5px 10px;
+    &__input {
+        border: 2px solid $main-grey;
+        border-radius: 20px;
+        padding: 3px 20px;
+        outline: none;
+    }
+    &__button {
+        border: none;
+        outline: none;
+        background: transparent;
+        color: $main-blue;
+        font-size: 30px;
+        cursor: pointer;
+        line-height: 30px;
+        margin-left: 6px;
+        transition: background .3s;
+        border-radius: 5px;
+        &:hover {
+            background: $main-blue-lighter;
+        }
+    }
+    &__form {
+        display: flex;
+        align-items: center;
+    }
+}
