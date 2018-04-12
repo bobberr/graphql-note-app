@@ -12,9 +12,9 @@ class App extends Component {
     return (
       <div>
         <div className="top-panel">
-          <AddDocument/>          
+          <AddDocument/> 
+          <SelectUser/>                   
           <AddUser/>
-          <SelectUser/>
         </div>
         <Documents/>
         <DocumentDisplay/>

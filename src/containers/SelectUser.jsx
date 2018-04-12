@@ -3,6 +3,8 @@ import gql from 'graphql-tag';
 import { graphql, withApollo } from 'react-apollo';
 import { connect } from 'react-redux';
 import { setDocuments, setActiveUser } from '../redux/actionCreators/actionCreators';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 const query = gql`
     query GetUsers {
@@ -34,34 +36,47 @@ const deleteDocument = gql`
 `;
 
 class SelectUser extends React.Component {
+    state = {
+        selectedOption: ''
+    };
     constructor() {
         super();
-        this.clickHandler = this.clickHandler.bind(this);
         this.deleteHandler = this.deleteHandler.bind(this);
-    }
-    clickHandler(e) {
-        this.props.setActiveUser(e.target.value);
-        this.props.client.query({query: getDocuments, variables: {user: e.target.value}, fetchPolicy: 'network-only'}).then((returnedData) => {
-            this.props.setDocuments(returnedData.data.getDocuments);
-        });
+        this.selectHandler = this.selectHandler.bind(this);
     }
     deleteHandler() {
         this.props.client.mutate({mutation: deleteDocument, variables: {id: this.props.document.id, user: this.props.user}}).then((returnedData) => {
             this.props.setDocuments(returnedData.data.deleteDocument);
         });
     }
+    selectHandler(selected) {
+        this.setState({selectedOption: selected})
+        this.props.setActiveUser(selected.value);
+        this.props.client.query({query: getDocuments, variables: {user: selected.value}, fetchPolicy: 'network-only'}).then((returnedData) => {
+            this.props.setDocuments(returnedData.data.getDocuments);
+        });
+    }
     render() {
+        const value = this.state.selectedOption && this.state.selectedOption.value;
         if(this.props.data.loading) return null;
-        const options = this.props.data.getUsers.map((user) => {
-            return <option key={user.id} value={user.email}>{user.email}</option>
-        }); 
+        const forSelect = this.props.data.getUsers.map((user) => {
+            return {
+                value: user.email,
+                label: user.email
+            }
+        });
         return (
-            <div>
-                <button onClick={this.deleteHandler}>Delete</button>
-                <select name="users" defaultValue={null} onChange={this.clickHandler}>
-                    <option value={null}></option>
-                    {options}
-                </select>
+            <div className="select-user">
+                <button className="select-user__button" style={{visibility: this.props.document.id ? "visible" : "hidden"}} onClick={this.deleteHandler}>
+                    <i className="select-user__bin"></i>
+                </button>                          
+                <Select
+                    name="form-field"
+                    onChange={this.selectHandler}
+                    options={forSelect}
+                    value={value}
+                    clearable={false}
+                />
             </div>
         )
     }

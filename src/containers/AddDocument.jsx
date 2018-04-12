@@ -20,13 +20,17 @@ const addDocumentMutation = gql`
 const AddDocument = (props) => {
     const submitHandler = (e) => {
         e.preventDefault();
-        props.addDocument({variables: {
-            title: this.title.value,
-            user: props.email
-        }}).then((returnedData) => {
-           props.setDocuments(returnedData.data.addDocument)
-        });
-        this.title.value = "";
+        if(this.title.value === "" || !props.email) {
+            return;
+        } else {
+            props.addDocument({variables: {
+                title: this.title.value,
+                user: props.email
+            }}).then((returnedData) => {
+               props.setDocuments(returnedData.data.addDocument)
+            });
+            this.title.value = "";
+        }
     }
     const changeHandler = () => {
         props.filterDocuments(this.title.value);

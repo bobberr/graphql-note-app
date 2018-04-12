@@ -1,0 +1,27 @@
+.select-user {
+    display: flex;
+    width: 300px;
+    align-items: center;
+    border: 2px solid $main-grey;
+    border-left: none;
+    padding: 0px 10px;
+    &__button {
+        margin-right: 10px;
+        border: none;
+        outline: none;
+        background: transparent;
+        cursor: pointer;
+        transition: background .3s;
+        padding: 5px;
+        border-radius: 5px;
+        &:hover {
+            background: $main-blue-lighter;
+        }
+    }
+    &__bin {
+        display: block;
+        height: 24px;
+        width: 24px;
+        background: url('./img/garbage.png') center;
+    }
+}
