@@ -16,8 +16,10 @@ class App extends Component {
           <SelectUser/>                   
           <AddUser/>
         </div>
-        <Documents/>
-        <DocumentDisplay/>
+        <div className="bottom-panel">
+          <Documents/>
+          <DocumentDisplay/>
+        </div>
       </div>
     );
   }

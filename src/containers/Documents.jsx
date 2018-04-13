@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setActiveDocument } from '../redux/actionCreators/actionCreators';
+import SingleDocument from '../components/SingleDocument';
 
 
 const Documents = (props) => {
@@ -20,10 +21,10 @@ const Documents = (props) => {
         documents = [];
     }
     const documentsToRender = documents.map((document) => {
-        return <li key={document.id} onClick={clickHandler.bind(null, document)}>{document.title} content:{document.content}</li>
+        return <SingleDocument key={document.id} clickHandler={clickHandler.bind(null, document)} title={document.title} content={document.content}/>
     });
     return(
-        <ul>
+        <ul className="document-list">
             {documentsToRender}
         </ul>
     )
