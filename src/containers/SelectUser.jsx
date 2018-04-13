@@ -50,11 +50,16 @@ class SelectUser extends React.Component {
         });
     }
     selectHandler(selected) {
-        this.setState({selectedOption: selected})
-        this.props.setActiveUser(selected.value);
-        this.props.client.query({query: getDocuments, variables: {user: selected.value}, fetchPolicy: 'network-only'}).then((returnedData) => {
-            this.props.setDocuments(returnedData.data.getDocuments);
-        });
+        if(selected) {
+            this.setState({selectedOption: selected})
+            this.props.setActiveUser(selected.value);
+            this.props.client.query({query: getDocuments, variables: {user: selected.value}, fetchPolicy: 'network-only'}).then((returnedData) => {
+                this.props.setDocuments(returnedData.data.getDocuments);
+            });
+        } else {
+            return;
+        }
+        
     }
     render() {
         const value = this.state.selectedOption && this.state.selectedOption.value;

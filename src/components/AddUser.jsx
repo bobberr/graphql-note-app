@@ -43,11 +43,13 @@ class AddUser extends React.Component {
         }
 
         return(
-            <form onSubmit={addUserHandler}>
-                <input type="text" ref={(ref) => {this.userEmail = ref}}/>
-                <button type="submit">Add User</button>
-                {this.state.emailError && <span>Incorrect email</span>}
-                {this.state.emailInUse && <span>Email in use</span>}
+            <form onSubmit={addUserHandler} className="add-user">
+                <input type="text" ref={(ref) => {this.userEmail = ref}} className="add-user__input"/>
+                <button type="submit" className="add-user__button">
+                    <i className="add-user__icon"></i>
+                </button>
+                {this.state.emailError && <span className="add-user__error">Incorrect email</span>}
+                {this.state.emailInUse && <span className="add-user__error">Email in use</span>}
             </form>
         )
     }

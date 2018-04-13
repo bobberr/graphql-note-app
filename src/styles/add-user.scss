@@ -1,13 +1,17 @@
-.add-document {
+.add-user {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0px 10px;
+    width: 100%;
     border: 2px solid $main-grey;
-    width: 300px;
-    padding: 5px 10px;
+    border-left: none;
     &__input {
         border: 2px solid $main-grey;
         border-radius: 20px;
         padding: 3px 20px;
         outline: none;
-        width: 250px;
+        width: 200px;
         transition: box-shadow .3s;
         &:focus {
             -webkit-box-shadow: 0px 0px 15px 0px rgba(117,168,213,0.71);
@@ -17,21 +21,20 @@
     }
     &__button {
         border: none;
-        outline: none;
         background: transparent;
-        color: $main-blue;
-        font-size: 30px;
         cursor: pointer;
-        line-height: 30px;
-        margin-left: 6px;
-        transition: background .3s;
+        padding: 5px;
         border-radius: 5px;
+        transition: background .3s;
+        margin-left: 10px;
         &:hover {
             background: $main-blue-lighter;
         }
     }
-    &__form {
-        display: flex;
-        align-items: center;
+    &__icon {
+        display: block;
+        width: 24px;
+        height: 24px;
+        background: url('./img/add-contact.png') center center;
     }
 }
