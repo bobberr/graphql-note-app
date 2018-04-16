@@ -2,15 +2,14 @@ import React from 'react';
 
 const SingleDocument = (props) => {
     if(props.content) {
-        console.log(props.content)
-        const contentToDisplay = props.content.split(' ', 3);
-        console.log(contentToDisplay);
+        var arrayOfContent = props.content.split(' ', 3);
+        var contentToDisplay = arrayOfContent.join(" ");
     }
     
     return (
-        <li onClick={props.clickHandler} className="document-list__item">
-            <span>{props.title}</span>
-            {props.content}
+        <li onClick={props.clickHandler} className={props.activeDocumentId === props.documentId ? "document-list__item active" : "document-list__item"}>
+            <span className="document-list__item-title">{props.title}</span>
+            { contentToDisplay ? `${contentToDisplay}...` : null}
         </li>
     )
 }

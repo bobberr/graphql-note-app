@@ -14,3 +14,15 @@
 .Select-control {
     height: 20px;
 }
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+}
+.root-div {
+    height: 100%;
+}
+#root {
+    height: calc(100% - 46px);
+}

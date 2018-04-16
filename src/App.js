@@ -10,7 +10,7 @@ import DocumentDisplay from './containers/DocumentDisplay';
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="root-div">
         <div className="top-panel">
           <AddDocument/> 
           <SelectUser/>                   

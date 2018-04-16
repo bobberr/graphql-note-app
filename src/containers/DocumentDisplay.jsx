@@ -35,9 +35,8 @@ class DocumentDisplay extends React.Component {
     }
     render() {
         return (
-            <div>
-                <span>{this.state.saving ? "saving" : "saved"}</span>
-                <textarea name="" cols="30" rows="10" ref={(ref) => {this.area = ref}} onChange={debounce(this.changeHandler, 2000)}></textarea>
+            <div className="document-display">
+                <textarea className="document-display__textarea" name="content area" cols="30" rows="10" ref={(ref) => {this.area = ref}} onChange={debounce(this.changeHandler, 2000)}></textarea>
             </div>
         )    
     }

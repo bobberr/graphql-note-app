@@ -21,7 +21,7 @@ const Documents = (props) => {
         documents = [];
     }
     const documentsToRender = documents.map((document) => {
-        return <SingleDocument key={document.id} clickHandler={clickHandler.bind(null, document)} title={document.title} content={document.content}/>
+        return <SingleDocument activeDocumentId={props.documentId} documentId={document.id} key={document.id} clickHandler={clickHandler.bind(null, document)} title={document.title} content={document.content}/>
     });
     return(
         <ul className="document-list">
@@ -33,7 +33,8 @@ const Documents = (props) => {
 const mapStateToProps = (state) => {
     return {
         documents: state.documents,
-        keyWord: state.keyWord
+        keyWord: state.keyWord,
+        documentId: state.document.id
     }
 }
 
