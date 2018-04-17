@@ -27,6 +27,7 @@
         border-radius: 5px;
         transition: background .3s;
         margin-left: 10px;
+        outline: none;
         &:hover {
             background: $main-blue-lighter;
         }
@@ -36,5 +37,8 @@
         width: 24px;
         height: 24px;
         background: url('./img/add-contact.png') center center;
+    }
+    &__error {
+        margin-right: 20px;
     }
 }

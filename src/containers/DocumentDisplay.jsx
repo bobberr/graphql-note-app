@@ -26,12 +26,16 @@ class DocumentDisplay extends React.Component {
         this.area.value = this.props.document.content;
     }
     changeHandler = () => {
-        this.props.client.mutate({mutation: changeDocument, variables: {
-            id: this.props.document.id,
-            content: this.area.value
-        }}).then((returnedDocument) => {
-            this.props.updateDocumentsList(returnedDocument.data.changeDocument);
-        });
+        if(this.props.document.id) {
+            this.props.client.mutate({mutation: changeDocument, variables: {
+                id: this.props.document.id,
+                content: this.area.value
+            }}).then((returnedDocument) => {
+                this.props.updateDocumentsList(returnedDocument.data.changeDocument);
+            });
+        } else {
+            return;
+        }
     }
     render() {
         return (
